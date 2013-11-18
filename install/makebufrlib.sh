@@ -30,12 +30,12 @@ then
     if [ -z "${FC}" ]
     then
        echo "[lib/makebufrlib.sh - OS Test] :: Setting FC"
-       export FC=gfortran
+       export FC=ifort
     fi
     if [ -z "${CC}" ]
     then
        echo "[lib/makebufrlib.sh - OS Test] :: Setting FC"
-       export CC=gcc
+       export CC=icc
     fi
     CPPFLAGS=" -P -traditional-cpp -C"
 else
@@ -176,8 +176,9 @@ EOF
 export LIB="./libbufr.a"
 if [ $OS = "Linux" ] || [ $OS = "Darwin" ]
 then
-    export FFLAGS=" -O3 -DUNDERSCORE -fno-second-underscore"
-    export CFLAGS=" -O3 -DUNDERSCORE"
+    #export FFLAGS=" -O3 -DUNDERSCORE -fno-second-underscore"
+    export FFLAGS=" -fPIC -O3 -DUNDERSCORE"
+    export CFLAGS=" -fPIC -O3 -DUNDERSCORE"
     export AFLAGS=" "
 else
     echo "[lib/makebufrlib.sh - Not Linux (Compile)] :: Please set compile flags for your OS"
