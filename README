@@ -2,6 +2,20 @@
 Wrap NCEP BUFRLIB using F2PY to use in python
 
 
+Developed with Intel Fortran 12.1.5.  Compatibility with other compilers not guaranteed
+
+Requires:
+ + F2PY <http://cens.ioc.ee/projects/f2py2e/>
+
+Quick start:
+ + go to install/
+ + run compile.sh
+ + return to ./
+ + copy test_scripts/testbuild.py to ./
+   - Or just make sure that py_bufrlib.so and testbuild.py are in same directory
+ + run ./testbuild.py
+
+
 Kevin Manross
 
 
