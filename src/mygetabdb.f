@@ -42,9 +42,11 @@ C$$$
      .                TABA(MAXTBA,NFILES),TABB(MAXTBB,NFILES),
      .                TABD(MAXTBD,NFILES)
 
-      CHARACTER*600 TABD
+      CHARACTER*600 TABD,AFMT,BFMT,DFMT
       CHARACTER*128 TABB
       CHARACTER*128 TABA
+      CHARACTER*600 TEMP, ELEMS
+      INTEGER       ENTRIES
       PARAMETER     (ENTRIES=900)
       CHARACTER*600 TABDB(ENTRIES)
       CHARACTER*600 TABANEMS,TABBNEMS,TABDNEMS
@@ -70,7 +72,10 @@ C  --------------------------
       JTAB = JTAB+1
       IF(JTAB.LE.ENTRIES) THEN
          if (NSEQ .gt. 0) then
-         WRITE(TABDB(JTAB),1) NEMO,(NEMS(J),J=1,NSEQ)
+         write(AFMT,'(A,I4,A)') '(''A::'',A8,',NSEQ,'('','',A10))'
+C         write(*,*) 'ATTEMPT...', DFMT
+         write(*,AFMT) NEMO,(NEMS(J),J=1,NSEQ)
+         WRITE(TABDB(JTAB),AFMT) NEMO,(NEMS(J),J=1,NSEQ)
          endif
       ENDIF
       ENDDO
@@ -82,7 +87,17 @@ C  --------------------------
       JTAB = JTAB+1
       IF(JTAB.LE.ENTRIES) THEN
          if (NSEQ .gt. 0) then
-         WRITE(TABDB(JTAB),2) NEMO,(NEMS(J),J=1,NSEQ)
+
+C THIS WORKS! (sans comma)
+C         write(myfmt,'(A,I4,A)') '(',NSEQ,'(1X,A10))'
+C         write(*,*) 'ATTEMPT...'
+C         write(*,fmt=myfmt) (NEMS(J),J=1,NSEQ)
+
+         write(DFMT,'(A,I4,A)') '(''D::'',A8,',NSEQ,'('','',A10))'
+C         write(*,*) 'ATTEMPT...', DFMT
+         write(*,DFMT) NEMO,(NEMS(J),J=1,NSEQ)
+
+         WRITE(TABDB(JTAB),DFMT) NEMO,(NEMS(J),J=1,NSEQ)
          endif
       ENDIF
       ENDDO
@@ -98,8 +113,8 @@ C  --------------------------
       ENDIF
       ENDDO
 
-1        FORMAT('A::',A8,<NSEQ>(',',A10))
-2        FORMAT('D::',A8,<NSEQ>(',',A10))
+C1        FORMAT('A::',A8,<NSEQ>(',',A10))
+C2        FORMAT('D::',A8,<NSEQ>(',',A10))
 3        FORMAT('B::',A8,',',A75,',',A25,',',A6)
 
 

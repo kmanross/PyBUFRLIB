@@ -30,12 +30,12 @@ then
     if [ -z "${FC}" ]
     then
        echo "[lib/makebufrlib.sh - OS Test] :: Setting FC"
-       export FC=ifort
+       export FC=gfortran
     fi
     if [ -z "${CC}" ]
     then
        echo "[lib/makebufrlib.sh - OS Test] :: Setting FC"
-       export CC=icc
+       export CC=gcc
     fi
     CPPFLAGS=" -P -traditional-cpp -C"
 else

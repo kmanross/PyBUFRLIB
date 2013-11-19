@@ -304,10 +304,11 @@ C$$$
 
       CHARACTER*(*) STR
       CHARACTER*128 BORT_STR1,BORT_STR2,ERRSTR
-      INTEGER       I1,I2
+      INTEGER       I1,I2,IRET
       REAL*8        USR(I1,I2),VAL
 Cf2py intent(in) I1
 Cf2py intent(in) I2
+Cf2py intent(out) IRET
 Cf2py intent(out) USR
 Cf2py depend(I1,I2) USR
 

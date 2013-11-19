@@ -42,15 +42,15 @@ C$$$
      .                TABA(MAXTBA,NFILES),TABB(MAXTBB,NFILES),
      .                TABD(MAXTBD,NFILES)
 
-      CHARACTER*600 TABD
+      CHARACTER*600 TABD,AFMT,DFMT
       CHARACTER*128 TABB
       CHARACTER*128 TABA
+      INTEGER       NSEQ,ENTRIES
       PARAMETER     (ENTRIES=900)
       CHARACTER*600 TABDB(ENTRIES)
       CHARACTER*600 TABANEMS,TABBNEMS,TABDNEMS
       CHARACTER*8   NEMO,NEMS(MAXCD)
       CHARACTER*80  DESC,UNITS,FXY
-      INTEGER       NSEQ
       DIMENSION     IRPS(MAXCD),KNTS(MAXCD)
 
 C-----------------------------------------------------------------------
@@ -70,13 +70,14 @@ C  --------------------------
       JTAB = JTAB+1
       IF(JTAB.LE.ENTRIES) THEN
          if (NSEQ .gt. 0) then
-         WRITE(TABDB(JTAB),2) NEMO,(NEMS(J),J=1,NSEQ)
+         write(DFMT,'(A,I4,A)') '(A8''::'',A8,',NSEQ,'('','',A10))'
+         WRITE(TABDB(JTAB),DFMT) NEMO,(NEMS(J),J=1,NSEQ)
          endif
       ENDIF
       ENDDO
 
 C2        FORMAT('D::',A8,<NSEQ>(',',A10))
-2        FORMAT(A8,'::',<NSEQ>(',',A10))
+C2        FORMAT(A8,'::',<NSEQ>(',',A10))
 
 
       RETURN
