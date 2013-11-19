@@ -51,7 +51,10 @@ f2py $list --include-paths $TMPFILE -m py_bufrlib -h bufrlib.pyf #--overwrite-si
 echo "Getting val"
 mxlcc=$(sed -n 's/.*MXLCC = \([0-9]\{1,\}\).*/\1/p' $TMPFILE/bufrlib.prm)
 echo "Val: $mxlcc"
-sed -i "s/mxlcc/$mxlcc/" bufrlib.pyf
+TMP_FILE=`mktemp /tmp/bufrlib.XXXXXXXXXX`
+sed -e "s/mxlcc/$mxlcc/" bufrlib.pyf > $TMP_FILE
+mv $TMP_FILE bufrlib.pyf
+#sed -i "s/mxlcc/$mxlcc/" bufrlib.pyf
 echo "Replaced"
 
 
