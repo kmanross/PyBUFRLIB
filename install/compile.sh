@@ -32,11 +32,22 @@ tar -xvf $BUFRLIBVER
 ### a '_bn' to the end of 'string' in the signature file. The makes importing
 ### the wrapped library fail since BUFRLIB has no subroutine 'string_bn'
 ### so we rename the subroutine here and in all calls to 'bfrstring'
-sed -i 's/\(SUBROUTINE\|CALL\) STRING *(/\1 BFRSTRING(/' *.f
+for k in *.f
+ do
+    TMP_FILE=`mktemp /tmp/$k.XXXXXXXXXX`
+    sed -e 's/\(SUBROUTINE\|CALL\) STRING *(/\1 BFRSTRING(/' $k > $TMP_FILE
+    mv $TMP_FILE $k
+done
+
+
+
 
 ### Don't know how many of these there are, but the OUTPUTS section
 ### of readns.f has a paramater that doesn't match those in the parameter list
-sed -i 's/\(.*\)\(IREADNS\)\( *-.*\)/\1IRET\3/' readns.f
+TMP_FILE=`mktemp /tmp/bufrlib-readns.XXXXXXXXXX`
+sed -e 's/\(.*\)\(IREADNS\)\( *-.*\)/\1IRET\3/' readns.f > $TMP_FILE
+mv $TMP_FILE readns.f
+
 
 ./makebufrlib.sh
 cd $BASE
@@ -51,10 +62,11 @@ f2py $list --include-paths $TMPFILE -m py_bufrlib -h bufrlib.pyf #--overwrite-si
 echo "Getting val"
 mxlcc=$(sed -n 's/.*MXLCC = \([0-9]\{1,\}\).*/\1/p' $TMPFILE/bufrlib.prm)
 echo "Val: $mxlcc"
+
 TMP_FILE=`mktemp /tmp/bufrlib.XXXXXXXXXX`
 sed -e "s/mxlcc/$mxlcc/" bufrlib.pyf > $TMP_FILE
 mv $TMP_FILE bufrlib.pyf
-#sed -i "s/mxlcc/$mxlcc/" bufrlib.pyf
+
 echo "Replaced"
 
 
