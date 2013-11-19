@@ -3,7 +3,7 @@ Wrap NCEP BUFRLIB using F2PY to use in python
 
 
 Developed with Intel Fortran 12.1.5.  Compatibility with other compilers not guaranteed
-Updated to work with gfortran
+Updated to work with gfortran!!!
 
 Requires:
  + F2PY <http://cens.ioc.ee/projects/f2py2e/>
