@@ -73,8 +73,6 @@ C  --------------------------
       IF(JTAB.LE.ENTRIES) THEN
          if (NSEQ .gt. 0) then
          write(AFMT,'(A,I4,A)') '(''A::'',A8,',NSEQ,'('','',A10))'
-C         write(*,*) 'ATTEMPT...', DFMT
-         write(*,AFMT) NEMO,(NEMS(J),J=1,NSEQ)
          WRITE(TABDB(JTAB),AFMT) NEMO,(NEMS(J),J=1,NSEQ)
          endif
       ENDIF
@@ -87,16 +85,7 @@ C         write(*,*) 'ATTEMPT...', DFMT
       JTAB = JTAB+1
       IF(JTAB.LE.ENTRIES) THEN
          if (NSEQ .gt. 0) then
-
-C THIS WORKS! (sans comma)
-C         write(myfmt,'(A,I4,A)') '(',NSEQ,'(1X,A10))'
-C         write(*,*) 'ATTEMPT...'
-C         write(*,fmt=myfmt) (NEMS(J),J=1,NSEQ)
-
          write(DFMT,'(A,I4,A)') '(''D::'',A8,',NSEQ,'('','',A10))'
-C         write(*,*) 'ATTEMPT...', DFMT
-         write(*,DFMT) NEMO,(NEMS(J),J=1,NSEQ)
-
          WRITE(TABDB(JTAB),DFMT) NEMO,(NEMS(J),J=1,NSEQ)
          endif
       ENDIF

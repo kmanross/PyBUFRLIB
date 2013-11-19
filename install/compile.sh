@@ -49,7 +49,7 @@ echo "Initial f2py call..."
 f2py $list --include-paths $TMPFILE -m py_bufrlib -h bufrlib.pyf #--overwrite-signature
 
 echo "Getting val"
-mxlcc=$(sed -n 's/.*MXLCC = \([0-9]\+\).*/\1/p' $TMPFILE/bufrlib.prm)
+mxlcc=$(sed -n 's/.*MXLCC = \([0-9]\{1,\}\).*/\1/p' $TMPFILE/bufrlib.prm)
 echo "Val: $mxlcc"
 sed -i "s/mxlcc/$mxlcc/" bufrlib.pyf
 echo "Replaced"
