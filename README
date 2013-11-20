@@ -1,12 +1,15 @@
-
 Wrap NCEP BUFRLIB using F2PY to use in python
 
 
 Developed with Intel Fortran 12.1.5.  Compatibility with other compilers not guaranteed
+
 Updated to work with gfortran!!!
+
+compile scripts now work on OSX 10.8
 
 Requires:
  + F2PY <http://cens.ioc.ee/projects/f2py2e/>
+ + wget
 
 Quick start:
  + go to install/
@@ -14,7 +17,15 @@ Quick start:
  + return to ./
  + copy test_scripts/testbuild.py to ./
    - Or just make sure that py_bufrlib.so and testbuild.py are in same directory
- + run ./testbuild.py
+ + run ./testbuild.py -h
+
+Other Goodies
+ + run testtab.py to get a dict of Table A mnemonics as a hierarcical function of Table D & Table B mnemonics.
+ 
+ Eg.
+ 
+ TableA:
+    TableD: [TableB, tableB,,,,]
 
 
 Kevin Manross
