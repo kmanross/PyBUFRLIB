@@ -35,7 +35,7 @@ tar -xvf $BUFRLIBVER
 for k in *.f
  do
     TMP_FILE=`mktemp /tmp/$k.XXXXXXXXXX`
-    sed -e 's/\(SUBROUTINE\|CALL\) STRING *(/\1 BFRSTRING(/' $k > $TMP_FILE
+    sed -e 's/\([SC][A-Z]*\) STRING *(/\1 BFRSTRING(/' $k > $TMP_FILE
     mv $TMP_FILE $k
 done
 
