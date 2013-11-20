@@ -114,8 +114,10 @@ for i in `ls *.F`
 do
   bn=`basename $i .F`
   bnf=${bn}.f
+  F=${bn}.EFF
+  mv $i $F
   BNFS="$BNFS $bnf"
-  cpp $CPPFLAGS -D$byte_order $i $bnf
+  cpp $CPPFLAGS -D$byte_order $F $bnf
 done
 
 #-------------------------------------------------------------------------------
