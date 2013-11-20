@@ -73,7 +73,8 @@ echo "Replaced"
 
 
 echo "Calling bufrlib_ioparser.pl..."
-bufrlib_ioparser.pl "bufrlib.pyf" $list
+/usr/bin/env perl bufrlib_ioparser.pl "bufrlib.pyf" $list
+
 
 "Calling f2py for final time..."
 #f2py --lower --include-paths $TMPFILE --f77exec=/glade/apps/opt/modulefiles/../cmpwrappers/ifort --compiler=intel --f77flags="-fPIC -DUNDERSCORE" -c -DUNDERSCORE_G77 bufrlib.pyf $list -L$TMPFILE -lbufr -I$TMPFILE
